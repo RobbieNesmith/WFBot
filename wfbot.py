@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from icalevents.icalevents import events
 import random
 
@@ -17,8 +17,11 @@ def slackbot():
     if len(newBoCoEvents):
         eventSummary = newBoCoEvents[0].summary
         try:
-            return random.choice(snark) + " " + random.choice(located) + " " + eventSummary.split(": ")[1]
+            text = random.choice(snark) + " " + random.choice(located) + " " + eventSummary.split(": ")[1]
         except:    
-            return newBoCoEvents[0].summary
+            text = newBoCoEvents[0].summary
     else:
-        return random.choice(dunno)
+        text = random.choice(dunno)
+
+
+    return jsonify({"response_type": "in_channel", "text": text})
