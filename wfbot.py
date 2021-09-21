@@ -10,7 +10,7 @@ located = ["Whiskey Friday is going to be at", "we're going to", "the destinatio
 
 dunno = ["I don't know, sorry.", "I have no idea.", "Go ask someone else.", "I seem to have forgotten."]
 
-@app.route("/")
+@app.route("/",methods=["POST"])
 def slackbot():
     newBoCoEvents = events("https://newbo.co/events/list/?shortcode=75735a1e&ical=1")
     newBoCoEvents = list(filter(lambda e: "Whiskey Friday" in e.summary, newBoCoEvents))
